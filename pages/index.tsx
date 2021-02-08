@@ -1,6 +1,6 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -19,7 +19,7 @@ export default function Home() {
         <p className="mt-3 text-2xl">
           Get started by editing{' '}
           <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
+            pages/index.tsx
           </code>
         </p>
 
@@ -78,5 +78,5 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  )
+  );
 }
