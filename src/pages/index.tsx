@@ -1,82 +1,72 @@
 import Head from 'next/head';
 
-export default function Home(): JSX.Element {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+import {Html} from "next/document";
+import React, {FC} from "react";
+import ArticleList from '../templates/ArticleList';
+import { Post } from '../domains/models/post';
+import { Tag } from '../domains/models/tag';
+import TagList from '../molecules/TagList';
 
-      <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+const Posts: Post[] = [
+  {
+    id: 'abcdefghijklmnopqrstuvwxy1',
+    title: '新規投稿',
+    thumbnailUrl: 'new_thumbnail_url',
+    content: 'new_content',
+    permalink: 'new_permalink',
+    isDraft: false,
+    createdAt: '2021-01-24T17:49:01+09:00',
+    updatedAt: '2021-01-24T17:49:01+09:00',
+    publishedAt: '2021-01-26T17:49:01+09:00',
+  },
+  {
+    id: 'abcdefghijklmnopqrstuvwxy2',
+    title: '新規投稿2',
+    thumbnailUrl: 'new_thumbnail_url',
+    content: 'new_content',
+    permalink: 'new_permalink',
+    isDraft: false,
+    createdAt: '2021-01-24T17:49:01+09:00',
+    updatedAt: '2021-01-24T17:49:01+09:00',
+    publishedAt: '2021-01-25T17:49:01+09:00',
+  },
+  {
+    id: 'abcdefghijklmnopqrstuvwxy3',
+    title: '新規投稿3',
+    thumbnailUrl: 'new_thumbnail_url',
+    content: 'new_content',
+    permalink: 'new_permalink',
+    isDraft: false,
+    createdAt: '2021-01-24T17:49:01+09:00',
+    updatedAt: '2021-01-24T17:49:01+09:00',
+    publishedAt: '2021-01-24T17:49:01+09:00',
+  },
+];
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.tsx
-          </code>
-        </p>
+const Tags: Tag[] = [
+  {
+    id: 'abcdefghijklmnopqrstuvwxyz',
+    name: 'new_tag',
+    createdAt: '2021-01-24T17:49:01+09:00',
+    updatedAt: '2021-01-24T17:49:01+09:00',
+  },
+  {
+    id: 'abcdefghijklmnopqrstuvwxy2',
+    name: 'タグ2',
+    createdAt: '2021-01-24T17:49:01+09:00',
+    updatedAt: '2021-01-24T17:49:01+09:00',
+  },
+];
 
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+const Home: FC = () => (
+      <div className="flex flex-col items-center justify-center py-2">
+      <main>
+        <div className="flex flex-none md:flex-row flex-col align-top mt-10 max-w-screen-xl ">
+          <ArticleList posts={Posts} />
+          <TagList tags={Tags} />
         </div>
       </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
     </div>
   );
-}
+
+export default Home

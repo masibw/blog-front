@@ -1,0 +1,8 @@
+/*https://saruwakakun.com/html-css/reference/ul-ol-li-design 1-8を使用*/
+
+.tagHeader {
+  background-image: url('/tag-icon.svg');
+  background-repeat: no-repeat;
+  background-position: 30%;
+  background-size: 32px;
+}

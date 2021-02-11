@@ -1,0 +1,20 @@
+/* https://timing-web.com/textborder/ から拝借*/
+
+.titleBorder {
+  display: flex;
+  align-items: center;
+}
+.titleBorder:before,
+.titleBorder:after {
+  border-top: 3px solid;
+  content: '';
+  flex-grow: 1;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+.titleBorder:before {
+  margin-right: 1rem;
+}
+.titleBorder:after {
+  margin-left: 1rem;
+}
