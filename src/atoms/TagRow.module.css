@@ -1,0 +1,13 @@
+/*https://saruwakakun.com/html-css/reference/ul-ol-li-design 1-8を使用*/
+
+.tagRow:before {
+  display: inline-block;
+  vertical-align: middle;
+  /*以下白丸つくる*/
+  content: '';
+  width: 0.5em;
+  height: 0.5em;
+  background: #fff;
+  border-radius: 50%;
+  margin-right: 8px;
+}

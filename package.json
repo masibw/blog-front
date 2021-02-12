@@ -20,6 +20,8 @@
     "postcss": "^7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-paginate": "^7.0.0",
+    "react-query": "^3.8.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "devDependencies": {
@@ -35,6 +37,7 @@
     "@types/prettier": "^2.2.0",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
+    "@types/react-paginate": "^6.2.1",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "babel-loader": "^8.2.2",
