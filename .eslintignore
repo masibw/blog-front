@@ -6,3 +6,4 @@ public/
 *.config.js
 .*lintrc.js
 **/.next/*
+stories/

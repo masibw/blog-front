@@ -11,10 +11,10 @@ const Article: FC<{ post: Post }> = ({ post }) => (
       query: { permalink: post.permalink },
     }}
   >
-    <div className="cursor-pointer border m-1">
+    <div className="cursor-pointer  p-1 mb-4 md:w-1/2">
       <Image
-        src="/no-img.jpg"
-        alt="thumbnail"
+        src={`${post.thumbnailUrl ? post.thumbnailUrl : '/no-img.jpg'}`}
+        alt={`${post.title}_thumbnail`}
         width={400}
         height={300}
         layout="fixed"

@@ -1,20 +1,20 @@
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-import React from 'react'
+import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
+import React from 'react';
 
-type Props = {unknown}
+type Props = { unknown };
 
 class Document extends NextDocument<Props> {
-    render() {
-        return (
-            <Html lang="ja-JP">
-                <Head />
-                <body>
-                <Main />
-                <NextScript />
-                </body>
-            </Html>
-        )
-    }
+  render(): JSX.Element {
+    return (
+      <Html lang="ja-JP">
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
 
-export default Document
+export default Document;
