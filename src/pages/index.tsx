@@ -1,16 +1,49 @@
 import React, { FC } from 'react';
+import { useQuery } from 'react-query';
 import ArticleList from '../templates/ArticleList';
 import TagList from '../molecules/TagList';
+import { Post } from '../domains/models/post';
+import Loading from '../templates/Loading';
+import Error from '../templates/Error';
 
-const Home: FC = () => (
-  <main>
-    <div className="flex flex-col items-center justify-center py-2">
-      <div className="flex flex-none xl:flex-row flex-col align-top mt-10 max-w-screen-xl lg:w-9/12 ">
-        <ArticleList />
-        <TagList />
+type PostRes = {
+  count: number;
+  posts: Post[];
+};
+
+const getPosts = (page = 1, pageSize = 10, isDraft = 'false') =>
+  fetch(
+    `${process.env.NEXT_PUBLIC_API_HOST}/api/v1/posts?page=${page}&page-size=${pageSize}&is-draft=${isDraft}`,
+  ).then((res) => res.json());
+
+const Home: FC = () => {
+  const {
+    isLoading,
+    error,
+    data,
+  }: { isLoading: boolean; error: Error; data: PostRes } = useQuery(
+    'posts',
+    () => getPosts(),
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
+  return (
+    <main>
+      <div className="flex flex-col items-center justify-center py-2">
+        <div className="flex flex-none xl:flex-row flex-col align-top mt-10 max-w-screen-xl lg:w-9/12 ">
+          <ArticleList title="最新記事" posts={data.posts} count={data.count} />
+          <TagList />
+        </div>
       </div>
-    </div>
-  </main>
-);
+    </main>
+  );
+};
 
 export default Home;
