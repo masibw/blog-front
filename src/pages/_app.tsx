@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Header from '../templates/Header';
 import Footer from '../templates/Footer';
 import './pagination.css';
+import '../../styles/sns-icon.css'
 
 const queryClient = new QueryClient();
 
@@ -34,7 +35,7 @@ export default ({ Component, pageProps }: AppProps): JSX.Element => (
     </Head>
     <Header />
     {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-    <Component {...pageProps} />
+    <Component {...pageProps} className="bg-gray" />
     <Footer />
   </QueryClientProvider>
 );

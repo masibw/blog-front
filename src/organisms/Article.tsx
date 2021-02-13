@@ -18,7 +18,6 @@ const Article: FC<{ post: Post }> = ({ post }) => (
         width={400}
         height={300}
         layout="fixed"
-        className="md:w-full w-11/12"
       />
       <ArticleDetail post={post} />
     </div>

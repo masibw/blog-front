@@ -24,7 +24,7 @@ const TagList: FC = () => {
 
   if (isLoading)
     return (
-      <div className="p-0 md:w-3/12 w-10/12 m-auto md:m-0 order-2">
+      <div className="p-0 md:w-3/12 w-10/12 m-auto md:m-0 order-2 bg-white shadow-2xl ">
         <TagHeader />
         <p>Loading...</p>
       </div>
@@ -32,14 +32,14 @@ const TagList: FC = () => {
 
   if (error)
     return (
-      <div className="p-0 md:w-3/12 w-10/12 m-auto md:m-0 order-2">
+      <div className="p-0 md:w-3/12 w-10/12 m-auto md:m-0 order-2 bg-white shadow-2xl ">
         <TagHeader />
         <p>An error occurred: {error.message}</p>
       </div>
     );
 
   return (
-    <div className="p-0 md:w-3/12 w-10/12 m-auto md:m-0 order-2">
+    <div className="p-0 self-start md:w-3/12 w-10/12 m-auto md:m-0 order-2 bg-white shadow-2xl">
       <TagHeader />
       <ul>
         {data.tags.map((tag: Tag) => (
