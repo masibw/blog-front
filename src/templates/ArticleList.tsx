@@ -9,7 +9,7 @@ const ArticleList: FC<{ title: string; posts: Post[]; count: number }> = ({
   posts,
   count,
 }) => (
-  <div className="md:w-9/12 w-12/12 order-1">
+  <div className="md:w-9/12 w-12/12 order-1 bg-white shadow-2xl mr-8">
     <h1 className={`text-center m-auto text-4xl w-10/12 ${styles.titleBorder}`}>
       {title}
     </h1>
