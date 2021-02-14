@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useQuery } from 'react-query';
 import ArticleList from '../templates/ArticleList';
 import TagList from '../molecules/TagList';
@@ -17,14 +17,22 @@ const getPosts = (page = 1, pageSize = 10, isDraft = 'false') =>
   ).then((res) => res.json());
 
 const Home: FC = () => {
+  const [page, setPage] = useState<number>(1);
+
   const {
     isLoading,
     error,
     data,
   }: { isLoading: boolean; error: Error; data: PostRes } = useQuery(
-    'posts',
-    () => getPosts(),
+    ['posts', page],
+    () => getPosts(page),
   );
+
+  const handleClick = (selectedData: { selected: number }) => {
+    const { selected } = selectedData;
+    // 0-indexedなので+1する(サーバーは1ページから始める)
+    setPage(selected + 1);
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -38,7 +46,12 @@ const Home: FC = () => {
     <main>
       <div className="flex flex-col items-center justify-center py-2">
         <div className="flex flex-none xl:flex-row flex-col align-top mt-10 max-w-screen-xl lg:w-9/12 ">
-          <ArticleList title="最新記事" posts={data.posts} count={data.count} />
+          <ArticleList
+            title="最新記事"
+            posts={data.posts}
+            count={data.count}
+            handleClick={handleClick}
+          />
           <TagList />
         </div>
       </div>

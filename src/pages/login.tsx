@@ -20,13 +20,12 @@ type LoginContext = {
 
 export const LoginContext = createContext<LoginContext>({} as LoginContext);
 
-export const LoginProvider:FC = ({ children }) => {
+export const LoginProvider: FC = ({ children }) => {
   const [loginState, setLoginState] = useState<boolean>(false);
 
-  const updateLoginState = useCallback(
-    (state: boolean) => {
-      setLoginState(state);
-    },[]);
+  const updateLoginState = useCallback((state: boolean) => {
+    setLoginState(state);
+  }, []);
 
   return (
     <LoginContext.Provider
@@ -45,7 +44,7 @@ export const useRequireLogin = (): void => {
   const router = useRouter();
   useEffect(() => {
     if (!loginState) void router.push('/login');
-  }, [loginState,router]);
+  }, [loginState, router]);
 };
 
 const Login: FC = () => {
@@ -58,7 +57,7 @@ const Login: FC = () => {
   const router = useRouter();
   useEffect(() => {
     if (loginState) void router.push('/admin');
-  }, [loginState,router]);
+  }, [loginState, router]);
 
   const mutation = useMutation(
     (formData) =>
@@ -66,6 +65,7 @@ const Login: FC = () => {
     {
       onError: (error) => {
         // An error happened!
+        // eslint-disable-next-line no-console
         console.log(`failed to login`, error);
       },
       onSuccess: () => {
