@@ -49,7 +49,17 @@ const Home: FC = () => {
       <div className="flex flex-col items-center justify-center py-2">
         <div className="flex flex-none xl:flex-row flex-col align-top mt-10 max-w-screen-xl lg:w-9/12 ">
           <div className="md:w-9/12 w-12/12 order-1 bg-white shadow-2xl mr-8 p-8">
-            <time dateTime={data.post?.publishedAt ? new Date(data.post.publishedAt).toLocaleDateString() : '投稿時刻不明'}>{data.post?.publishedAt ? new Date(data.post.publishedAt).toLocaleDateString() : '投稿時刻不明'}</time>
+            <time
+              dateTime={
+                data.post?.publishedAt
+                  ? new Date(data.post.publishedAt).toLocaleDateString()
+                  : '投稿時刻不明'
+              }
+            >
+              {data.post?.publishedAt
+                ? new Date(data.post.publishedAt).toLocaleDateString()
+                : '投稿時刻不明'}
+            </time>
             <h1 className="text-left text-4xl w-10/12 my-2">
               {!data.post?.title ? `タイトルなし` : data.post.title}
             </h1>
@@ -67,16 +77,21 @@ const Home: FC = () => {
               />
             </div>
             <div className="flex xl:flex-row flex-col flex-wrap justify-between text-left p-12">
-              <div dangerouslySetInnerHTML={{__html: !data.post ? `投稿が存在しません` : data.post.content}} className="prose"/>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: !data.post ? `投稿が存在しません` : data.post.content,
+                }}
+                className="prose"
+              />
             </div>
             <aside className="flex rounded-xl p-3 m-6 box-border border-2 border-solid border-current">
               <div className="flex flex-shrink-0 items-center mr-4">
                 <Image
-                    src="/icon.jpg"
-                alt="masi icon"
+                  src="/icon.jpg"
+                  alt="masi icon"
                   width={73}
-                    height={73}
-                    className="w-full rounded-3xl"
+                  height={73}
+                  className="w-full rounded-3xl"
                 />
               </div>
               <div>
@@ -85,11 +100,17 @@ const Home: FC = () => {
                   Go,Java,Scalaなどを用いてサーバーサイドを中心に書く学生エンジニアです。
                   Dockerの通信に関する研究をしています。
                 </p>
-                <a href="https://github.com/masibw" className="text-primary mr-4 align-bottom">
-                  <i className="icon-github" aria-hidden="true"/>
+                <a
+                  href="https://github.com/masibw"
+                  className="text-primary mr-4 align-bottom"
+                >
+                  <i className="icon-github" aria-hidden="true" />
                   masibw
                 </a>
-                <a href="https://twitter.com/masibw" className="text-primary mr-4">
+                <a
+                  href="https://twitter.com/masibw"
+                  className="text-primary mr-4"
+                >
                   <i className="icon-twitter" aria-hidden="true" />
                   @masibw
                 </a>

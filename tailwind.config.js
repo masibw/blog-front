@@ -19,27 +19,25 @@ module.exports = {
         DEFAULT: {
           css: {
             h2: {
-              'border-bottom':'solid 5px #62b4bf',
+              'border-bottom': 'solid 5px #62b4bf',
               // '&:hover': {
               //   color: '#2c5282',
               // },
             },
-            a:{
-              color:'#006c83',
+            a: {
+              color: '#006c83',
             },
-            h3:{
-              'border-left':'solid 5px #62b4bf',
-              'padding-left':'0.5rem',
-            }
+            h3: {
+              'border-left': 'solid 5px #62b4bf',
+              'padding-left': '0.5rem',
+            },
           },
         },
-      }
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [require('@tailwindcss/typography')],
 };
