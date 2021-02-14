@@ -61,7 +61,7 @@ const Login: FC = () => {
 
   const mutation = useMutation(
     (formData) =>
-      axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/login`, formData),
+      axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/v1/login`, formData),
     {
       onError: (error) => {
         // An error happened!

@@ -2,10 +2,12 @@ import React, { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import Image from 'next/image';
+
 import TagList from '../../molecules/TagList';
 import Error from '../../templates/Error';
 import Loading from '../../templates/Loading';
 import { Post } from '../../domains/models/post';
+import ShareButtons from '../../molecules/ShareButtons';
 
 type PostRes = {
   post: Post;
@@ -13,7 +15,7 @@ type PostRes = {
 
 const getPostsByTag = (permalink = '') =>
   fetch(
-    `${process.env.NEXT_PUBLIC_API_HOST}/api/v1/posts/${permalink}`,
+    `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts/${permalink}`,
   ).then((res) => res.json());
 
 const Home: FC = () => {
@@ -76,6 +78,7 @@ const Home: FC = () => {
                 className="flex justify-center"
               />
             </div>
+            <ShareButtons />
             <div className="flex xl:flex-row flex-col flex-wrap justify-between text-left p-12">
               <div
                 dangerouslySetInnerHTML={{
@@ -84,6 +87,8 @@ const Home: FC = () => {
                 className="prose"
               />
             </div>
+            <ShareButtons />
+
             <aside className="flex rounded-xl p-3 m-6 box-border border-2 border-solid border-current">
               <div className="flex flex-shrink-0 items-center mr-4">
                 <Image
