@@ -9,7 +9,7 @@ type TagRes = {
 };
 
 const getTags = () =>
-  fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/tags`).then((res) =>
+  fetch(`${process.env.NEXT_PUBLIC_HOST}/api/v1/tags`).then((res) =>
     res.json(),
   );
 

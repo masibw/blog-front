@@ -19,7 +19,7 @@ const getPostsByTag = (
   isDraft = 'false',
 ) =>
   fetch(
-    `${process.env.NEXT_PUBLIC_API_HOST}/api/v1/posts?page=${page}&page-size=${pageSize}&is-draft=${isDraft}&tag=${tagName}`,
+    `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts?page=${page}&page-size=${pageSize}&is-draft=${isDraft}&tag=${tagName}`,
   ).then((res) => res.json());
 
 const Home: FC = () => {
