@@ -25,7 +25,7 @@ const getPostsByTag = (
 const Home: FC = () => {
   const router = useRouter();
   const [tagName, setTagName] = useState<string>();
-
+  const [page, setPage] = useState<number>(1);
   const {
     isLoading,
     error,
@@ -34,7 +34,13 @@ const Home: FC = () => {
     isLoading: boolean;
     error: Error;
     data: PostRes;
-  } = useQuery(`postsByTag_${tagName}`, () => getPostsByTag(tagName));
+  } = useQuery(`postsByTag_${tagName}`, () => getPostsByTag(tagName, page));
+
+  const handleClick = (selectedData: { selected: number }) => {
+    const { selected } = selectedData;
+    // 0-indexedなので+1する(サーバーは1ページから始める)
+    setPage(selected + 1);
+  };
 
   useEffect(() => {
     if (router.asPath !== router.route) {
@@ -58,6 +64,7 @@ const Home: FC = () => {
             title={`${tagName}の記事`}
             posts={data.posts}
             count={data.count}
+            handleClick={handleClick}
           />
           <TagList />
         </div>

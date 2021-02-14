@@ -4,11 +4,12 @@ import { Post } from '../domains/models/post';
 import Article from '../organisms/Article';
 import styles from './ArticleList.module.css';
 
-const ArticleList: FC<{ title: string; posts: Post[]; count: number }> = ({
-  title,
-  posts,
-  count,
-}) => (
+const ArticleList: FC<{
+  title: string;
+  posts: Post[];
+  count: number;
+  handleClick: (data) => void;
+}> = ({ title, posts, count, handleClick }) => (
   <div className="md:w-9/12 w-12/12 order-1 bg-white shadow-2xl mr-8">
     <h1 className={`text-center m-auto text-4xl w-10/12 ${styles.titleBorder}`}>
       {title}
@@ -22,10 +23,10 @@ const ArticleList: FC<{ title: string; posts: Post[]; count: number }> = ({
       previousLabel="prev"
       nextLabel="next"
       breakLabel="..."
-      pageCount={count ? count / 10 : 0}
+      pageCount={count ? count / 10 : 1}
       marginPagesDisplayed={2}
       pageRangeDisplayed={2}
-      onPageChange={null}
+      onPageChange={handleClick}
       containerClassName="pagination"
       pageLinkClassName="paginate-box"
       breakClassName="paginate-break-box"

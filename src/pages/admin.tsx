@@ -1,4 +1,4 @@
-import { FC,} from 'react';
+import { FC } from 'react';
 import { useRequireLogin } from './login';
 
 const Admin: FC = () => {
