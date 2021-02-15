@@ -13,7 +13,7 @@ type PostRes = {
   post: Post;
 };
 
-const getPostsByTag = (permalink = '') =>
+const getPostByPermalink = (permalink = '') =>
   fetch(
     `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts/${permalink}`,
   ).then((res) => res.json());
@@ -30,7 +30,7 @@ const Home: FC = () => {
     isLoading: boolean;
     error: Error;
     data: PostRes;
-  } = useQuery(`postsByTag_${permalink}`, () => getPostsByTag(permalink));
+  } = useQuery(`postsByTag_${permalink}`, () => getPostByPermalink(permalink));
 
   useEffect(() => {
     if (router.asPath !== router.route) {
