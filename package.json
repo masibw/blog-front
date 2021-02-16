@@ -11,7 +11,9 @@
     "lint:fix": "eslint --fix './**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write .",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "up": "docker-compose -f docker-compose.local.yml up --build",
+    "up:prod": "docker-compose -f docker-compose.prod.yml up --build"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
