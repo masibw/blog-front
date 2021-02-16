@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useMutation, useQuery } from 'react-query';
+import ChipInput from 'material-ui-chip-input';
 
 import 'easymde/dist/easymde.min.css';
 
@@ -17,6 +18,7 @@ import Error from '../../../templates/Error';
 import Loading from '../../../templates/Loading';
 import { Post } from '../../../domains/models/post';
 import AdminBreadcrumbs from '../../../molecules/AdminBreadcrumbs';
+import { useRequireLogin } from '../../login';
 import { Tag } from '../../../domains/models/tag';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
@@ -29,6 +31,10 @@ type PostRes = {
 
 type PostReq = {
   post: Post;
+  tags: string[];
+};
+
+type TagRes = {
   tags: Tag[];
 };
 
@@ -37,10 +43,27 @@ const getPostByPermalink = (permalink = '') =>
     `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts/${permalink}?is-markdown=true`,
   ).then((res) => res.json());
 
+const getTagByPostId = (id = '') =>
+  fetch(`${process.env.NEXT_PUBLIC_HOST}/api/v1/tags?post=${id}`).then((res) =>
+    res.json(),
+  );
+
 const Home: FC = () => {
+  useRequireLogin();
   const router = useRouter();
   const [permalink, setPermalink] = useState<string>();
   const [post, setPost] = useState<Post>();
+
+  const updateField = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) => {
+    setPost({
+      ...post,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const [tags, setTags] = useState<string[]>([]);
   const {
     isLoading,
     error,
@@ -51,14 +74,15 @@ const Home: FC = () => {
     data: PostRes;
   } = useQuery([`post`, permalink], () => getPostByPermalink(permalink));
 
-  const updateField = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-  ) => {
-    setPost({
-      ...post,
-      [e.target.name]: e.target.value,
-    });
-  };
+  useEffect(() => {
+    if (router.asPath !== router.route) {
+      setPost((p) => ({
+        ...p,
+        permalink: String(router.query.permalink),
+      }));
+      setPermalink(String(router.query.permalink));
+    }
+  }, [router]);
 
   const putPostMutation = useMutation(
     (postReq: PostReq) =>
@@ -79,16 +103,6 @@ const Home: FC = () => {
   );
 
   useEffect(() => {
-    if (router.asPath !== router.route) {
-      setPost((p) => ({
-        ...p,
-        permalink: String(router.query.permalink),
-      }));
-      setPermalink(String(router.query.permalink));
-    }
-  }, [router]);
-
-  useEffect(() => {
     if (!isLoading && !error) {
       setPost((p) => ({
         ...p,
@@ -100,8 +114,32 @@ const Home: FC = () => {
     }
   }, [data, isLoading, error]);
 
+  const {
+    data: tagData,
+  }: {
+    isLoading: boolean;
+    error: Error;
+    data: TagRes;
+  } = useQuery([`post`, post?.id], () => getTagByPostId(post?.id), {
+    enabled: !!post?.id,
+  });
+
+  useEffect(() => {
+    if (tagData?.tags) {
+      setTags(tagData.tags.map((tag) => tag.name));
+    }
+  }, [tagData]);
+
   const handleSave = () => {
-    putPostMutation.mutate({ post, tags: null });
+    putPostMutation.mutate({ post, tags });
+  };
+
+  const handleAddChip = (chip: string) => {
+    setTags([...tags, chip]);
+  };
+
+  const handleDeleteChip = (chip: string) => {
+    setTags(tags.filter((c) => c !== chip));
   };
 
   if (isLoading) {
@@ -140,6 +178,12 @@ const Home: FC = () => {
             updateField(e);
           }}
         />
+        <ChipInput
+          value={tags}
+          onAdd={(chip) => handleAddChip(chip)}
+          onDelete={(chip) => handleDeleteChip(chip)}
+        />
+
         <FormGroup row>
           <FormControlLabel
             control={

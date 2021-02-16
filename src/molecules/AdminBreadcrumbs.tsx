@@ -10,7 +10,6 @@ const AdminBreadcrumbs: FC<{ permalink: string }> = ({ permalink }) => {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     event.preventDefault();
-    console.info('You clicked a breadcrumb.');
     void router.push('/admin');
   };
 

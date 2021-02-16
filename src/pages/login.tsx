@@ -18,6 +18,11 @@ type LoginContext = {
   updateLoginState: (state: boolean) => void;
 };
 
+type LoginReq = {
+  mailAddress: string;
+  password: string;
+};
+
 export const LoginContext = createContext<LoginContext>({} as LoginContext);
 
 export const LoginProvider: FC = ({ children }) => {
@@ -60,7 +65,7 @@ const Login: FC = () => {
   }, [loginState, router]);
 
   const mutation = useMutation(
-    (formData) =>
+    (formData: LoginReq) =>
       axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/v1/login`, formData),
     {
       onError: (error) => {

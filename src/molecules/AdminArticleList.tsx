@@ -24,6 +24,7 @@ const AdminArticleList: FC<{ post: Post }> = ({ post }) => {
       },
       onSuccess: () => {
         // TODO 一覧データを更新する必要がある
+        // eslint-disable-next-line no-console
         console.log('success delete');
       },
     },
