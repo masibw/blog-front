@@ -3,19 +3,12 @@ services:
   front:
     build:
       context: .
-      dockerfile: docker/dev/Dockerfile
-    command: yarn dev
-    volumes:
-      - .:/workdir
-      - ignore:/workdir/node_modules
-    working_dir: /workdir
+      dockerfile: docker/prod/Dockerfile
+    command: yarn start
     env_file:
       - .env.local
     networks:
       - blog-network
-
-volumes:
-  ignore:
 
 networks:
   blog-network:
