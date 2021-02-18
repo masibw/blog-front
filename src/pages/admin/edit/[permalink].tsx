@@ -144,7 +144,7 @@ const Home: FC = () => {
     setTags(tags.filter((c) => c !== chip));
   };
 
-  const handleFinishedUploadThumbnail = (info: { file: { name: string; }; }) => {
+  const handleFinishedUploadThumbnail = (info: { file: { name: string } }) => {
     const uploadedThumbnailURL = `${
       process.env.NEXT_PUBLIC_S3URL
     }${info.file.name.replace(/[^\w\d_\-.]+/gi, '')}`;
@@ -153,7 +153,9 @@ const Home: FC = () => {
       thumbnailUrl: uploadedThumbnailURL,
     });
   };
-  const handleFinishedUploadInsertImage = (info: { file: { name: string; }; }) => {
+  const handleFinishedUploadInsertImage = (info: {
+    file: { name: string };
+  }) => {
     setUploadedFileUrl(
       `${process.env.NEXT_PUBLIC_S3URL}${info.file.name.replace(
         /[^\w\d_\-.]+/gi,
