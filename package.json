@@ -12,8 +12,10 @@
     "format": "prettier --write .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "up": "docker-compose -f docker-compose.local.yml up --build",
-    "up:prod": "docker-compose -f docker-compose.prod.yml up --build"
+    "up": "docker-compose -f docker-compose.local.yml up -d --build",
+    "down": "docker-compose -f docker-compose.local.yml down",
+    "up:prod": "docker-compose -f docker-compose.prod.yml up -d --build",
+    "down:prod": "docker-compose -f docker-compose.prod.yml down"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",

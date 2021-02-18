@@ -6,7 +6,7 @@ services:
       dockerfile: docker/prod/Dockerfile
     command: yarn start
     env_file:
-      - .env.local
+      - .env.prod
     networks:
       - blog-network
 
