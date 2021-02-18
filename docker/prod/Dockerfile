@@ -15,6 +15,7 @@ WORKDIR /app
 COPY --from=build /build/package.json /build/yarn.lock ./
 COPY --from=build /build/.next ./.next
 COPY --from=build /build/public ./public
+COPY --from=build /build/next.config.js ./next.config.js
 
 RUN yarn add next
 
