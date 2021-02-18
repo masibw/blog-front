@@ -202,7 +202,7 @@ const Admin: FC = () => {
       </Dialog>
       <div className="flex flex-row">
         <List dense={dense}>
-          {data.posts.map((post) => (
+          {data.posts?.map((post) => (
             <AdminArticleList key={post.id} post={post} />
           ))}
         </List>

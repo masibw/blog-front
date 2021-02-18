@@ -29,6 +29,7 @@
     "postcss": "^7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-dropzone-s3-uploader": "^1.1.0",
     "react-paginate": "^7.0.0",
     "react-query": "^3.8.3",
     "react-share": "^4.3.1",

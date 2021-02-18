@@ -20,6 +20,7 @@ import { Post } from '../../../domains/models/post';
 import AdminBreadcrumbs from '../../../molecules/AdminBreadcrumbs';
 import { useRequireLogin } from '../../login';
 import { Tag } from '../../../domains/models/tag';
+import S3Uploader from '../../../molecules/S3Uploader';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
@@ -64,6 +65,7 @@ const Home: FC = () => {
   };
 
   const [tags, setTags] = useState<string[]>([]);
+  const [uploadedFileUrl, setUploadedFileUrl] = useState<string>();
   const {
     isLoading,
     error,
@@ -142,6 +144,24 @@ const Home: FC = () => {
     setTags(tags.filter((c) => c !== chip));
   };
 
+  const handleFinishedUploadThumbnail = (info: { file: { name: string; }; }) => {
+    const uploadedThumbnailURL = `${
+      process.env.NEXT_PUBLIC_S3URL
+    }${info.file.name.replace(/[^\w\d_\-.]+/gi, '')}`;
+    setPost({
+      ...post,
+      thumbnailUrl: uploadedThumbnailURL,
+    });
+  };
+  const handleFinishedUploadInsertImage = (info: { file: { name: string; }; }) => {
+    setUploadedFileUrl(
+      `${process.env.NEXT_PUBLIC_S3URL}${info.file.name.replace(
+        /[^\w\d_\-.]+/gi,
+        '',
+      )}`,
+    );
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -180,10 +200,21 @@ const Home: FC = () => {
         />
         <ChipInput
           value={tags}
+          label="tags"
           onAdd={(chip) => handleAddChip(chip)}
           onDelete={(chip) => handleDeleteChip(chip)}
         />
-
+        <div className="flex flex-row">
+          <S3Uploader
+            title="thumbnail"
+            handleFinishedUpload={handleFinishedUploadThumbnail}
+          />
+          <S3Uploader
+            title="insert image"
+            handleFinishedUpload={handleFinishedUploadInsertImage}
+          />
+          <p>{uploadedFileUrl}</p>
+        </div>
         <FormGroup row>
           <FormControlLabel
             control={

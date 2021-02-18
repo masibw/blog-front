@@ -42,7 +42,7 @@ const TagList: FC = () => {
     <div className="p-0 self-start md:w-3/12 w-10/12 m-auto md:m-0 order-2 bg-white shadow-2xl">
       <TagHeader />
       <ul>
-        {data.tags.map((tag: Tag) => (
+        {data.tags?.map((tag: Tag) => (
           <TagRow key={tag.id} tag={tag} />
         ))}
       </ul>
