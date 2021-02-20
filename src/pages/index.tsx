@@ -13,7 +13,7 @@ type PostRes = {
 
 const getPosts = (page = 1, pageSize = 10, isDraft = 'false') =>
   fetch(
-    `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts?page=${page}&page-size=${pageSize}&is-draft=${isDraft}`,
+    `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts?page=${page}&page-size=${pageSize}&is-draft=${isDraft}&sort=-publishedAt`,
   ).then((res) => res.json());
 
 const Home: FC = () => {

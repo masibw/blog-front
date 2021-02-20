@@ -10,7 +10,7 @@ services:
       - ignore:/workdir/node_modules
     working_dir: /workdir
     env_file:
-      - .env.local
+      - .env
     networks:
       - blog-network
 
