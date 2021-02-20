@@ -3,9 +3,14 @@ FROM node:15.6-alpine AS build
 
 
 WORKDIR /build
-COPY . .
+
+COPY package*.json ./
+COPY yarn.lock ./
 RUN yarn install
+
+COPY . .
 RUN NODE_ENV=production yarn build
+
 
 
 FROM node:15.6-alpine AS production
@@ -13,11 +18,12 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 COPY --from=build /build/package.json /build/yarn.lock ./
-COPY --from=build /build/.next ./.next
-COPY --from=build /build/public ./public
-COPY --from=build /build/next.config.js ./next.config.js
-
 RUN yarn add next
+
+COPY --from=build /build/.next ./.next
+COPY --from=build /build/next.config.js ./next.config.js
+COPY --from=build /build/public ./public
+
 
 EXPOSE 3000
 CMD ["yarn", "start"]
