@@ -41,13 +41,9 @@ export default ({ Component, pageProps }: AppProps): JSX.Element => {
           <meta property="og:locale" content="ja_JP" />
           <meta name="description" content="サーバーサイドエンジニアの雑記" />
           <meta property="og:title" content="めしまし" />
-          <meta
-            property="og:description"
-            content="サーバーサイドエンジニアの雑記"
-          />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://mesimasi.com" />
-          <meta property="og:image" content="/logo.png" />
+          <meta property="og:url" content="https://mesimasi.com" key="og:url" />
+          <meta property="og:image" content="/logo.png" key="og:image" />
           <meta property="og:site_name" content="めしまし" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@masibw" />
