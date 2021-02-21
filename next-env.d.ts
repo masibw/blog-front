@@ -7,9 +7,9 @@ interface Window {
     type: 'event',
     eventAction: string,
     fieldObject: {
-        // eslint-disable-next-line camelcase
+      // eslint-disable-next-line camelcase
       event_label: string;
-        // eslint-disable-next-line camelcase
+      // eslint-disable-next-line camelcase
       event_category: string;
       value?: number;
     },
