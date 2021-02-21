@@ -33,7 +33,7 @@ type PostReq = {
 
 const getPosts = (page = 1, pageSize = 10) =>
   fetch(
-    `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts?page=${page}&page-size=${pageSize}&order=-createdAt`,
+    `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts?page=${page}&page-size=${pageSize}&sort=-createdAt`,
   ).then((res) => res.json());
 
 const Admin: FC = () => {
