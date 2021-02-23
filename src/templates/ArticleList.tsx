@@ -10,11 +10,11 @@ const ArticleList: FC<{
   count: number;
   handleClick: (data) => void;
 }> = ({ title, posts, count, handleClick }) => (
-  <div className="md:w-9/12 w-12/12 order-1 bg-white shadow-2xl mr-8">
+  <div className="md:w-9/12 w-12/12 order-1 bg-white shadow-2xl">
     <h1 className={`text-center m-auto text-4xl w-10/12 ${styles.titleBorder}`}>
       {title}
     </h1>
-    <div className="flex xl:flex-row flex-col flex-wrap justify-between text-left p-12">
+    <div className="flex md:flex-row flex-col flex-wrap justify-between text-left p-12">
       {!posts
         ? `投稿が存在しません`
         : posts.map((post) => <Article key={post.id} post={post} />)}
