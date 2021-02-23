@@ -17,7 +17,7 @@ const Article: FC<{ post: Post }> = ({ post }) => (
         alt={`${post.title}_thumbnail`}
         width={400}
         height={300}
-        layout="fixed"
+        layout="responsive"
       />
       <ArticleDetail post={post} />
     </div>
