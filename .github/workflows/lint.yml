@@ -9,5 +9,5 @@ jobs:
       - name: eslint
         uses: reviewdog/action-eslint@v1
         with:
-          reporter: eslint
+          reporter: github-pr-review
           eslint_flags: './**/*.{js,jsx,ts,tsx}'
