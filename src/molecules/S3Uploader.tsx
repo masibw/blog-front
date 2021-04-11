@@ -6,6 +6,7 @@ const S3Uploader: FC<{
   handleFinishedUpload: (info) => void;
 }> = ({ title, handleFinishedUpload }) => {
   const handleError = (error, text) => {
+    // eslint-disable-next-line no-console
     console.log('error', error, text);
   };
 

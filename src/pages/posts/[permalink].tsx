@@ -90,6 +90,7 @@ const Home: FC = () => {
                   width={700}
                   height={400}
                   layout="intrinsic"
+                  className="object-contain"
                 />
               </div>
               <ShareButtons />
