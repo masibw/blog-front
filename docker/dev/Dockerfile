@@ -1,4 +1,4 @@
-FROM node:15.6
+FROM node:15.12
 
 WORKDIR /workdir
 
