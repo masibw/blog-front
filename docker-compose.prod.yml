@@ -5,8 +5,6 @@ services:
       context: .
       dockerfile: docker/prod/Dockerfile
     command: yarn start
-    env_file:
-      - .env.production
     networks:
       - blog-network
 
