@@ -1,5 +1,5 @@
 # 参考 https://qiita.com/ragnar1904/items/e49aa82756dfbf7cf2f5
-FROM node:15.13.0-alpine AS build
+FROM node:15.14.0-alpine AS build
 
 
 WORKDIR /build
@@ -13,7 +13,7 @@ RUN NODE_ENV=production yarn build
 
 
 
-FROM node:15.13.0-alpine AS production
+FROM node:15.14.0-alpine AS production
 ENV NODE_ENV=production
 WORKDIR /app
 
