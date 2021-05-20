@@ -45,7 +45,7 @@ const Home: FC = () => {
   return (
     <main>
       <div className="flex flex-col items-center justify-center py-2">
-        <div className="flex md:flex-row flex-col align-top mt-10 max-w-screen-xl lg:w-9/12 ">
+        <div className="flex md:flex-row flex-col align-top mt-10 max-w-screen-xl md:w-11/12 md:space-x-8">
           <ArticleList
             title="最新記事"
             posts={data.posts}
