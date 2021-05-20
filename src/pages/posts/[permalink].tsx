@@ -64,7 +64,7 @@ const Home: FC = () => {
       <main>
         <div className="md:flex md:flex-col md:items-center md:justify-center py-2 break-words">
           <div className="flex xl:flex-row flex-col align-top mt-10 max-w-screen-xl lg:w-9/12 ">
-            <div className="md:w-9/12 w-12/12 order-1 bg-white shadow-2xl mr-8 p-8">
+            <div className="md:w-9/12 w-12/12 order-1 bg-white shadow-2xl md:mr-8 p-8">
               <time
                 dateTime={
                   data.post?.publishedAt
