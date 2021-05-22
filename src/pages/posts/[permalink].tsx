@@ -101,7 +101,7 @@ const Home: FC = () => {
                       ? `投稿が存在しません`
                       : data.post.content,
                   }}
-                  className="prose"
+                  className="prose md:prose-lg"
                 />
               </div>
               <ShareButtons />
