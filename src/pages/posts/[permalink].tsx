@@ -1,12 +1,9 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
+import React, { FC } from 'react';
 import Image from 'next/image';
-
 import Head from 'next/head';
+import { NextPageContext } from 'next';
 import TagList from '../../molecules/TagList';
 import Error from '../../templates/Error';
-import Loading from '../../templates/Loading';
 import { Post } from '../../domains/models/post';
 import ShareButtons from '../../molecules/ShareButtons';
 
@@ -14,9 +11,15 @@ type PostRes = {
   post: Post;
 };
 
-export async function getServerSideProps(context) {
-  const permalink = context.query.permalink
-  const response: PostRes = await getPostByPermalink(permalink)
+const getPostByPermalink = async (permalink = ''): Promise<PostRes> =>
+  fetch(
+    `${process.env.NEXT_PUBLIC_SSR_HOST}/api/v1/posts/${permalink}`,
+  ).then((res) => new Promise<PostRes>((resolve)=> resolve(res.json())));
+
+export async function getServerSideProps(context: NextPageContext) {
+  const {permalink} = context.query
+  const response: PostRes = await getPostByPermalink(typeof permalink === "string"? permalink : '')
+
   return {
     props: {
       post: response.post
@@ -24,24 +27,13 @@ export async function getServerSideProps(context) {
   }
 }
 
-const getPostByPermalink = async (permalink = ''): Promise<PostRes> =>
-  fetch(
-    `${process.env.NEXT_PUBLIC_SSR_HOST}/api/v1/posts/${permalink}`,
-  ).then((res) => res.json());
 
 const Home: FC<{post: Post}> = ({post}) => {
-  const router = useRouter();
-  const [permalink, setPermalink] = useState<string>();
-
-  useEffect(() => {
-    if (router.asPath !== router.route) {
-      setPermalink(String(router.query.permalink));
-    }
-  }, [router]);
 
     if (!post) {
     return <Error />;
     }
+
   return (
     <>
       <Head>
