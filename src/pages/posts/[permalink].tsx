@@ -14,24 +14,24 @@ type PostRes = {
   post: Post;
 };
 
-const getPostByPermalink = (permalink = '') =>
+export async function getServerSideProps(context) {
+  const permalink = context.query.permalink
+  const response: PostRes = await getPostByPermalink(permalink)
+  return {
+    props: {
+      post: response.post
+    }
+  }
+}
+
+const getPostByPermalink = async (permalink = ''): Promise<PostRes> =>
   fetch(
-    `${process.env.NEXT_PUBLIC_HOST}/api/v1/posts/${permalink}`,
+    `${process.env.NEXT_PUBLIC_SSR_HOST}/api/v1/posts/${permalink}`,
   ).then((res) => res.json());
 
-const Home: FC = () => {
+const Home: FC<{post: Post}> = ({post}) => {
   const router = useRouter();
   const [permalink, setPermalink] = useState<string>();
-
-  const {
-    isLoading,
-    error,
-    data,
-  }: {
-    isLoading: boolean;
-    error: Error;
-    data: PostRes;
-  } = useQuery(`postsByTag_${permalink}`, () => getPostByPermalink(permalink));
 
   useEffect(() => {
     if (router.asPath !== router.route) {
@@ -39,25 +39,20 @@ const Home: FC = () => {
     }
   }, [router]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (error) {
+    if (!post) {
     return <Error />;
-  }
-
+    }
   return (
     <>
       <Head>
         <meta
           property="og:url"
-          content={`https://mesimasi.com${data.post?.permalink}`}
+          content={`https://mesimasi.com${post.permalink}`}
           key="og:url"
         />
         <meta
           property="og:image"
-          content={`${data.post?.thumbnailUrl}`}
+          content={`${post.thumbnailUrl}`}
           key="og:image"
         />
       </Head>
@@ -67,26 +62,26 @@ const Home: FC = () => {
             <div className="md:w-9/12 w-12/12 order-1 bg-white shadow-2xl p-8">
               <time
                 dateTime={
-                  data.post?.publishedAt
-                    ? new Date(data.post.publishedAt).toLocaleDateString()
+                  post.publishedAt
+                    ? new Date(post.publishedAt).toLocaleDateString()
                     : '投稿時刻不明'
                 }
               >
-                {data.post?.publishedAt
-                  ? new Date(data.post.publishedAt).toLocaleDateString()
+                {post.publishedAt
+                  ? new Date(post.publishedAt).toLocaleDateString()
                   : '投稿時刻不明'}
               </time>
               <h1 className="text-left text-4xl w-12/12 my-2">
-                {!data.post?.title ? `タイトルなし` : data.post.title}
+                {!post.title ? `タイトルなし` : post.title}
               </h1>
               <div className="flex justify-center mt-8">
                 <Image
                   src={`${
-                    data.post?.thumbnailUrl
-                      ? data.post.thumbnailUrl
+                    post.thumbnailUrl
+                      ? post.thumbnailUrl
                       : '/no-img.jpg'
                   }`}
-                  alt={`${data.post?.title}_thumbnail`}
+                  alt={`${post.title}_thumbnail`}
                   width={700}
                   height={400}
                   layout="intrinsic"
@@ -97,9 +92,9 @@ const Home: FC = () => {
               <div className="text-left my-4 lg:p-12">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: !data.post
+                    __html: !post
                       ? `投稿が存在しません`
-                      : data.post.content,
+                      : post.content,
                   }}
                   className="prose md:prose-lg"
                 />
