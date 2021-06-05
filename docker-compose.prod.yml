@@ -5,6 +5,11 @@ services:
       context: .
       dockerfile: docker/prod/Dockerfile
     command: yarn start
+    environment:
+      - NEXT_PUBLIC_SSR_HOST
+      - NEXT_PUBLIC_HOST
+      - NEXT_PUBLIC_S3URL
+      - GA_TRACKING_ID
     networks:
       - blog-network
 
