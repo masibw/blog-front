@@ -1,0 +1,33 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deplooy:
+    name: deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      - name: Set docker context
+        run: |
+          docker context create --default-stack-orchestrator=swarm --docker "host=ssh://${SSH_USERNAME}@${SSH_IP}:${SSH_PORT}" remote
+        env:
+          SSH_USERNAME: ${{ secrets.SSH_USER_NAME }}
+          SSH_IP: ${{ secrets.SSH_IP }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+      - name: Deploy
+        run: |
+          docker-compose -f docker-compose.prod.yml --context remote stop
+          docker-compose -f docker-compose.prod.yml --context remote up --build -d
+        env:
+          COMPOSE_HTTP_TIMEOUT: 1200
+          NEXT_PUBLIC_HOST: ${{ secrets.NEXT_PUBLIC_HOST }}
+          NEXT_PUBLIC_S3URL: ${{ secrets.NEXT_PUBLIC_S3URL }}
+          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
