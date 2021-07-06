@@ -126,9 +126,11 @@ const Admin: FC = () => {
     e.preventDefault();
     setOpen(false);
 
-    putNewPostMutation.mutate({ post: newPost, tags: null });
-
-    void router.push(`/admin/edit/${newPost.permalink}`);
+    putNewPostMutation.mutate({ post: newPost, tags: null },{
+      onSuccess: () => {
+        void router.push(`/admin/edit/${newPost.permalink}`);
+      }
+    });
   };
 
   const handleClick = (selectedData: { selected: number }) => {
