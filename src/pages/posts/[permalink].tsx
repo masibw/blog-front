@@ -88,7 +88,7 @@ const Home: FC<{post: Post}> = ({post}) => {
                       ? `投稿が存在しません`
                       : post.content,
                   }}
-                  className="prose md:prose-lg"
+                  className="prose md:prose-lg max-w-4xl"
                 />
               </div>
               <ShareButtons />

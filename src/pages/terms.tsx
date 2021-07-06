@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 const Terms: FC = () => (
-  <div className="prose m-auto my-4 w-11/12">
+  <div className="prose m-auto my-4 w-11/12 max-w-4xl">
     <h1>利用規約</h1>
     <p>
       mesimasi(mesimasi.com)（以下、「当サイト」とします。）における免責事項は、下記の通りです。
